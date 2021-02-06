@@ -24,9 +24,10 @@
 
 | Column            | Type        | Options                        |
 | ----------------- | ----------  | -------------------------------|
-| item_name         | string      | null: false                    |
-| item_price        | integer     | null: false                    |
-| item_condition_id | integer     | null: false                    |
+| name        　　　 | string      | null: false                    |
+| price        　　　| integer     | null: false                    |
+| detail       　　　| text        | null: false                    |
+| condition_id　　　 | integer     | null: false                    |
 | shipping_fee_id   | integer     | null: false                    |
 | shipment_place_id | integer     | null: false                    |
 | shipment_date_id  | integer     | null: false                    |
@@ -44,10 +45,6 @@
 
 | Column     | Type        | Options                        |
 | ---------- | ----------  | ------------------------------ |
-| card_num   | string      | null: false                    |
-| card_month | string      | null: false                    |
-| card_year  | string      | null: false                    |    
-| secu_code  | string      | null: false                    |
 | user       | references  | null: false, foreign_key: true |
 | item       | references  | null: false, foreign_key: true |
 

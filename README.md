@@ -2,16 +2,16 @@
 
 ## users テーブル
 
-| Column          | Type    | Options     |
-| --------------- | ------  | ----------- |
-| nickname        | string  | null: false |
-| email           | string  | null: false |
-| password        | string  | null: false |
-| first_name      | string  | null: false |
-| last_name       | string  | null: false |
-| kana_first_name | string  | null: false |
-| kana_last_name  | string  | null: false |
-| birthday        | date    | null: false |
+| Column             | Type    | Options     |
+| ------------------ | ------  | ----------- |
+| nickname           | string  | null: false |
+| email              | string  | null: false |
+| encrypted_password | string  | null: false |
+| first_name         | string  | null: false |
+| last_name          | string  | null: false |
+| kana_first_name    | string  | null: false |
+| kana_last_name     | string  | null: false |
+| birthday           | date    | null: false |
 
 
 ### Association
@@ -30,8 +30,8 @@
 | shipping_fee_id   | integer     | null: false                    |
 | shipment_place_id | integer     | null: false                    |
 | shipment_date_id  | integer     | null: false                    |
-| category_id       | integer     | null: false                   |
-| user_id           | references  | null: false, foreign_key: true |
+| category_id       | integer     | null: false                    |
+| user              | references  | null: false, foreign_key: true |
 
 
 ### Association
@@ -44,12 +44,12 @@
 
 | Column     | Type        | Options                        |
 | ---------- | ----------  | ------------------------------ |
-| card_num   | integer     | null: false                    |
-| card_month | integer     | null: false                    |
-| card_year  | integer     | null: false                    |    
-| secu_code  | integer     | null: false                    |
-| user_id    | references  | null: false, foreign_key: true |
-| item_id    | references  | null: false, foreign_key: true |
+| card_num   | string      | null: false                    |
+| card_month | string      | null: false                    |
+| card_year  | string      | null: false                    |    
+| secu_code  | string      | null: false                    |
+| user       | references  | null: false, foreign_key: true |
+| item       | references  | null: false, foreign_key: true |
 
 ### Association
 
@@ -64,10 +64,10 @@
 | post_code         | string      | null: false                    |
 | shipment_place_id | integer     | null: false                    |
 | city              | string      | null: false                    |    
-| address_1         | string      | null: false                    |
-| address_2         | string      | null: false                    |
+| street_num        | string      | null: false                    |
+| building          | string      |                                |
 | tel_num           | string      | null: false                    |
-| order_id          | references  | null: false, foreign_key: true |  
+| order             | references  | null: false, foreign_key: true |  
 
 ### Association
 
@@ -78,8 +78,8 @@
 | Column     | Type        | Options                        |
 | ---------- | ----------  | ------------------------------ |
 | text       | text        |                                |
-| user_id    | references  | null: false, foreign_key: true |
-| item_id    | references  | null: false, foreign_key: true |
+| user       | references  | null: false, foreign_key: true |
+| item       | references  | null: false, foreign_key: true |
 
 ### Association
 

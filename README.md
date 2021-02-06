@@ -5,13 +5,14 @@
 | Column          | Type    | Options     |
 | --------------- | ------  | ----------- |
 | nickname        | string  | null: false |
+| email           | string  | null: false |
+| password        | string  | null: false |
 | first_name      | string  | null: false |
 | last_name       | string  | null: false |
 | kana_first_name | string  | null: false |
 | kana_last_name  | string  | null: false |
-| birth_yeah      | integer | null: false |
-| birth_month     | integer | null: false |
-| birth_day       | integer | null: false |
+| birthday        | date    | null: false |
+
 
 ### Association
 
@@ -21,21 +22,22 @@
 
 ## items テーブル
 
-| Column          | Type        | Options                        |
-| --------------- | ----------  | -------------------------------|
-| item_name       | string      | null: false                    |
-| item_condition  | string      | null: false                    |
-| shipping_fee    | string      | null: false                    |
-| shipment_place  | string      | null: false                    |
-| shipment_date   | string      | null: false                    |
-| user_id         | references  | null: false, foreign_key: true |
-| category_id     | references  | null: false, foreign_key: true |
+| Column            | Type        | Options                        |
+| ----------------- | ----------  | -------------------------------|
+| item_name         | string      | null: false                    |
+| item_price        | integer     | null: false                    |
+| item_condition_id | integer     | null: false                    |
+| shipping_fee_id   | integer     | null: false                    |
+| shipment_place_id | integer     | null: false                    |
+| shipment_date_id  | integer     | null: false                    |
+| category_id       | integer     | null: false                   |
+| user_id           | references  | null: false, foreign_key: true |
+
 
 ### Association
 
 - has_many :comments
 - belongs_to :user
-- belongs_to :category
 - has_one :order
 
 ## orders テーブル
@@ -57,16 +59,15 @@
 
 ## address テーブル
 
-| Column     | Type        | Options                        |
-| ---------- | ----------  | ------------------------------ |
-| post_num   | integer     | null: false                    |
-| prefecture | integer     | null: false                    |
-| city       | integer     | null: false                    |    
-| address_1  | integer     | null: false                    |
-| address_2  | references  | null: false                    |
-| address_3  | references  |                                |
-| tel_num    | integer     | null: false                    |
-| order_id   | references  | null: false, foreign_key: true |  
+| Column            | Type        | Options                        |
+| ----------------  | ----------  | ------------------------------ |
+| post_code         | string      | null: false                    |
+| shipment_place_id | integer     | null: false                    |
+| city              | string      | null: false                    |    
+| address_1         | string      | null: false                    |
+| address_2         | string      | null: false                    |
+| tel_num           | string      | null: false                    |
+| order_id          | references  | null: false, foreign_key: true |  
 
 ### Association
 
@@ -84,14 +85,3 @@
 
 - belongs_to :user
 - belongs_to :item
-
-## categories テーブル
-
-| Column     | Type        | Options                        |
-| ---------- | ----------  | ------------------------------ |
-| name       | string      | null: false                    |
-| item_id    | references  | null: false, foreign_key: true |
-
-### Association
-
-- has_many :items

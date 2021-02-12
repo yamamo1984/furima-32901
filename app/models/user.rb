@@ -5,18 +5,17 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   with_options presence: true do
-
     validates :nickname 
-    validates :encrypted_password,  format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i, message: '英数字を含めてください' }     
-   
-    with_options format: { with: /\A[ぁ-んァ-ヶ一-龥々]+\z/, message: '全角文字を使用してください' } do
-     validates :first_name
-     validates :last_name
+    validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i, message: 'has to include number and alphabet' }     
+
+    with_options  format: { with: /\A[ぁ-んァ-ヶ一-龥々]+\z/, message: 'has to use full-width character' } do
+    validates :first_name
+    validates :last_name
     end
-    
-    with_options format: { with: /\A[ァ-ヶ]+\z/, message: '全角カタカナを使用してください' } do  
-      validates :kana_first_name
-      validates :kana_last_name
+   
+    with_options format: { with: /\A[ァ-ヶ]+\z/, message: 'has to use full-width Katakana character' } do
+    validates :kana_first_name 
+    validates :kana_last_name
     end
     
     validates :birthday

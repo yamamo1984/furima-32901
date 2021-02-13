@@ -7,7 +7,8 @@ class User < ApplicationRecord
   with_options presence: true do
     validates :nickname 
     validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i, message: 'has to include number and alphabet' }     
-
+    validates :password, format: { with: /\A[a-zA-Z0-9]+\z/, message: 'has to use half-width alphanumeric' } 
+    
     with_options  format: { with: /\A[ぁ-んァ-ヶ一-龥々]+\z/, message: 'has to use full-width character' } do
     validates :first_name
     validates :last_name

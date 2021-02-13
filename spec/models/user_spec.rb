@@ -83,6 +83,11 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include ("First name has to use full-width character")
         expect(@user.errors.full_messages).to include ("Last name has to use full-width character")
+      end  
+      it 'passwordに全角文字が含まれていると登録できない' do
+        @user.password = 'Ｔest111'
+        @user.valid?
+        expect(@user.errors.full_messages).to include ("Password has to use half-width alphanumeric")
       end
       it 'kana_first_name、kana_last_nameが全角カタカナでなければ登録できない' do
           @user.kana_first_name = 'てすと'

@@ -24,10 +24,10 @@
 
 | Column            | Type        | Options                        |
 | ----------------- | ----------  | -------------------------------|
-| name        　　　 | string      | null: false                    |
-| price        　　　| integer     | null: false                    |
-| detail       　　　| text        | null: false                    |
-| condition_id　　　 | integer     | null: false                    |
+| name              | string      | null: false                    |
+| price             | integer     | null: false                    |
+| detail            | text        | null: false                    |
+| condition_id      | integer     | null: false                    |
 | shipping_fee_id   | integer     | null: false                    |
 | shipment_place_id | integer     | null: false                    |
 | shipment_date_id  | integer     | null: false                    |

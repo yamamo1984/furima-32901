@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   def index
+    @item = Item.all
   end  
 
   def new
@@ -8,8 +9,13 @@ class ItemsController < ApplicationController
 
    
   def create
-    Item.create(item_params)
-  end  
+    @item = Item.new(item_params)
+    if @item.save!
+       redirect_to items_path(@item)
+    else  
+      render :new
+    end   
+  end
 
   private
 

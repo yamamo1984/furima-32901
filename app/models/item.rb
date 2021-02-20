@@ -9,16 +9,15 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
 
-  with_options presence: true do
+  with_options presence: { message: 'は必ず入力してください' } do
     validates :name 
     validates :detail 
     validates :image
-    validates :price,  format: { with: /\A[0-9]+\z/, message: 'has to use half-width alphanumeric' }
-    validates :price,  inclusion: { in: 300..9999999, message: 'は300〜9999999円の間にしてください' }
+    validates :price,  format: { with: /\A[0-9]+\z/, message: 'は半角で入力してください', inclusion: { in: 300..9999999, message: 'は300〜9999999円の間にしてください' } }
   end
 
   #アクティブハッシュのバリデーション
-  with_options numericality: { other_than: 1 } do
+  with_options numericality: { other_than: 1, message: 'は必ず選択してください' } do
     validates :condition_id
     validates :shipping_fee_id
     validates :shipment_date_id

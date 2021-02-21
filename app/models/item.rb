@@ -10,10 +10,11 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   with_options presence: { message: 'は必ず入力してください' } do
-    validates :name 
-    validates :detail 
+    validates :name, length: { maximum: 40 , message: 'は40文字以下にしてください' } 
+    validates :detail, length: { maximum: 1000 , message: 'は1000文字以下にしてください' } 
     validates :image
-    validates :price,  format: { with: /\A[0-9]+\z/, message: 'は半角で入力してください', inclusion: { in: 300..9999999, message: 'は300〜9999999円の間にしてください' } }
+    validates :price,  format: { with: /\A[0-9]+\z/, message: 'は半角で入力してください'}
+    validates :price,  inclusion: { in: 300..9999999, message: 'は300〜9999999円の間にしてください' } 
   end
 
   #アクティブハッシュのバリデーション

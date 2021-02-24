@@ -15,7 +15,7 @@ RSpec.describe Item, type: :model do
         expect(@item).to be_valid
       end
       it '販売価格が300〜9999999円の間であれば出品できる' do
-        @item.price = '300'
+        @item.price = 300
         expect(@item).to be_valid
       end
     end
@@ -47,31 +47,7 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include ("Detail は必ず入力してください")
       end 
-      it 'category_idカラムが空だと出品できない' do
-        @item.category_id = ''
-        @item.valid?
-        expect(@item.errors.full_messages).to include ("Category は必ず選択してください")
-      end 
-      it 'condition_idカラムが空だと出品できない' do
-        @item.condition_id = ''
-        @item.valid?
-        expect(@item.errors.full_messages).to include ("Condition は必ず選択してください")
-      end 
-      it 'shipping_fee_idカラムが空だと出品できない' do
-        @item.shipping_fee_id = ''
-        @item.valid?
-        expect(@item.errors.full_messages).to include ("Shipping fee は必ず選択してください")
-      end 
-      it 'shipment_place_idカラムが空だと出品できない' do
-        @item.shipment_place_id = ''
-        @item.valid?
-        expect(@item.errors.full_messages).to include ("Shipment place は必ず選択してください")
-      end 
-      it 'shipment_date_idカラムが空だと出品できない' do
-        @item.shipment_date_id = ''
-        @item.valid?
-        expect(@item.errors.full_messages).to include ("Shipment date は必ず選択してください")
-      end 
+    
       it 'priceカラムが空だと出品できない' do
         @item.price = ''
         @item.valid?
@@ -79,15 +55,40 @@ RSpec.describe Item, type: :model do
       end 
 
       it 'priceカラムが300円以下だと出品できない' do
-        @item.price = '299'
+        @item.price = 299
         @item.valid?
         expect(@item.errors.full_messages).to include ("Price は300〜9999999円の間にしてください")
       end 
       it 'priceカラムが9999999円以下だと出品できない' do
-        @item.price = '10000000'
+        @item.price = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include ("Price は300〜9999999円の間にしてください")
       end
+      it 'category_idカラムが1だと出品できない' do
+        @item.category_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include ("Category は---以外を選択してください")
+      end 
+      it 'condition_idカラムが1だと出品できない' do
+        @item.condition_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include ("Condition は---以外を選択してください")
+      end 
+      it 'shipping_fee_idカラムが1だと出品できない' do
+        @item.shipping_fee_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include ("Shipping fee は---以外を選択してください")
+      end 
+      it 'shipment_place_idカラムが1だと出品できない' do
+        @item.shipment_place_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include ("Shipment place は---以外を選択してください")
+      end 
+      it 'shipment_date_idカラムが1だと出品できない' do
+        @item.shipment_date_id = 1
+        @item.valid?
+        expect(@item.errors.full_messages).to include ("Shipment date は---以外を選択してください")
+      end 
     end
   end    
 end

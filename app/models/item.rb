@@ -18,7 +18,7 @@ class Item < ApplicationRecord
   end
 
   #アクティブハッシュのバリデーション
-  with_options numericality: { other_than: 1, message: 'は必ず選択してください' } do
+  with_options numericality: { other_than: 1, message: 'は---以外を選択してください' } do
     validates :condition_id
     validates :shipping_fee_id
     validates :shipment_date_id

@@ -6,7 +6,7 @@ RSpec.describe Item, type: :model do
   end 
 
   describe '商品出品' do
-    context '出品できるとき' do
+    context '商品出品に成功した時' do
       it 'name、price、detail、image、condition_id、shipping_fee_id、shipment_place_id、shipment_date_id、category_id、user_idが存在すれば出品できる' do
         expect(@item).to be_valid
       end
@@ -20,7 +20,7 @@ RSpec.describe Item, type: :model do
       end
     end
     
-    context '新規登録できないとき' do
+    context '商品出品に失敗した時' do
 
       it 'nameカラムが空だと出品できない' do
         @item.name = ''
@@ -66,6 +66,11 @@ RSpec.describe Item, type: :model do
       end
       it 'priceカラムが半角英数字混合では出品できない' do
         @item.price = '1AAA' 
+        @item.valid?
+        expect(@item.errors.full_messages).to include ("Price は半角数字で入力してください")
+      end 
+      it 'priceカラムが半角英字のみでは出品できない' do
+        @item.price = 'AAA' 
         @item.valid?
         expect(@item.errors.full_messages).to include ("Price は半角数字で入力してください")
       end 

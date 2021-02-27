@@ -13,10 +13,11 @@ class Item < ApplicationRecord
     validates :name, length: { maximum: 40 , message: 'は40文字以下にしてください' } 
     validates :detail, length: { maximum: 1000 , message: 'は1000文字以下にしてください' } 
     validates :image
-    validates :price,  inclusion: { in: 300..9999999, message: 'は300〜9999999円の間にしてください' } 
-    validates :price,  numericality: {with: /\A[0-9]+\z/, message: 'は半角数字で入力してください'}
-    
+    validates :price
   end
+
+  validates :price,  inclusion: { in: 300..9999999, message: 'は300〜9999999円の間にしてください' } 
+  validates :price,  numericality: {with: /\A[0-9]+\z/, message: 'は半角数字で入力してください'}
 
   #アクティブハッシュのバリデーション
   with_options numericality: { other_than: 1, message: 'は---以外を選択してください' } do

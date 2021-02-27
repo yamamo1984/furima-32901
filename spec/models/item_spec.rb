@@ -65,17 +65,12 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include ("Price は300〜9999999円の間にしてください")
       end
       it 'priceカラムが半角英数字混合では出品できない' do
-        @item.price = 'AAA' 
-        @item.valid?
-        expect(@item.errors.full_messages).to include ("Price は数字で入力してください")
-      end 
-      it 'priceカラムが半角英字では出品できない' do
-        @item.price = 'aaa'
+        @item.price = '1AAA' 
         @item.valid?
         expect(@item.errors.full_messages).to include ("Price は半角数字で入力してください")
       end 
       it 'priceカラムが全角文字では登録できないこと' do
-        @item.price = '２９９'
+        @item.price = '３０００'
         @item.valid?
         expect(@item.errors.full_messages).to include ("Price は半角数字で入力してください")
       end 

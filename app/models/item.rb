@@ -14,8 +14,7 @@ class Item < ApplicationRecord
     validates :detail, length: { maximum: 1000 , message: 'は1000文字以下にしてください' } 
     validates :image
     validates :price,  inclusion: { in: 300..9999999, message: 'は300〜9999999円の間にしてください' } 
-    validates :price,  numericality: {only_integer: true, message: 'は半角数字で入力してください'}
-    validates :price,  numericality: {only_integer: true, message: 'は数字で入力してください'}
+    validates :price,  numericality: {with: /\A[0-9]+\z/, message: 'は半角数字で入力してください'}
     
   end
 

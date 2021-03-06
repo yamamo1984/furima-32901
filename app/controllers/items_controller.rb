@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
-  before_action :set_item, only: [:show, :edit, :update]
-  before_action :user_check, only: [:edit, :update]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :user_check, only: [:edit, :update, :destroy]
   def index
     @items = Item.all.order("created_at DESC")
   end  
@@ -24,7 +24,6 @@ class ItemsController < ApplicationController
   end  
 
   def edit
-    binding.pry
   end  
 
   def update
@@ -34,7 +33,15 @@ class ItemsController < ApplicationController
    else  
       render :edit
    end   
- end  
+  end  
+
+  def destroy
+    if @item.destroy
+      redirect_to items_path
+   else  
+      render :show
+   end   
+  end 
 
 
   private

@@ -1,23 +1,19 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:create, :index]
+  before_action :item_find, only: [:index, :create]
+  before_action :reject_unlogined, only: [:index, :create]
+  
 
   def index
-    @item = Item.find(params[:item_id])
-
-    if current_user.id == @item.user_id then
-      redirect_to root_path
-    end  
-    
     @order_address = OrderAddress.new
   end  
 
   def create
-    @item = Item.find(params[:item_id])
     @order_address = OrderAddress.new(order_params)
     if @order_address.valid?
       pay_order
       @order_address.save
-      redirect_to action: :index
+      redirect_to root_path
     else
       render action: :index
     end
@@ -37,6 +33,18 @@ class OrdersController < ApplicationController
         currency: 'jpy'
       )
   end     
+
+  def item_find
+    @item = Item.find(params[:item_id])
+  end
+
+  def reject_unlogined
+    if current_user.id == @item.user_id then
+      redirect_to root_path
+    end  
+  end
+
+ 
 
 end  
 

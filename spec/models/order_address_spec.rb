@@ -11,11 +11,25 @@ RSpec.describe OrderAddress, type: :model do
       it 'すべての値が正しく入力されていれば、購入できること' do
         expect(@order_address).to be_valid
       end
+      it 'buildingカラムが空でも購入できること' do
+        @order_address.building = nil
+        expect(@order_address).to be_valid
+      end
       
     end  
 
   
     context '購入に失敗した時' do
+      it 'user_idが空では登録できないこと' do
+        @order_address.user_id = nil
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("User は必ず入力してください")
+      end
+      it 'item_idが空では登録できないこと' do
+        @order_address.item_id = nil
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Item は必ず入力してください")
+      end
       it 'tokenが空では登録できないこと' do
         @order_address.token = nil
         @order_address.valid?

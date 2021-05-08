@@ -55,7 +55,7 @@ class ItemsController < ApplicationController
   end  
 
   def user_check
-    unless current_user.id == @item.user_id || Order.find_by(item_id: @item.id)
+    if current_user.id != @item.user_id || Order.find_by(item_id: @item.id)
       redirect_to root_path
     end  
   end  
